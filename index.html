@@ -1,753 +1,463 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Восточная Азия - Туры для студентов</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* Общие стили */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            color: #f1f1f1;
-            background: linear-gradient(135deg, #0a1920 0%, #133a3a 100%);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        /* Навигация */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(10, 25, 32, 0.9);
-            backdrop-filter: blur(10px);
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: #4ecdc4;
-        }
-
-        .logo i {
-            margin-right: 0.5rem;
-            font-size: 1.8rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            position: relative;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #4ecdc4;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #4ecdc4;
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .burger {
-            display: none;
-            cursor: pointer;
-        }
-
-        .burger div {
-            width: 25px;
-            height: 3px;
-            background: #f1f1f1;
-            margin: 5px;
-            transition: all 0.3s ease;
-        }
-
-        /* Герой секция */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 2rem;
-            position: relative;
-            background: linear-gradient(rgba(10, 25, 32, 0.7), rgba(19, 58, 58, 0.7)), url('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?ixlib=rb-4.0.3') no-repeat center center/cover;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .hero-content h1 span {
-            color: #4ecdc4;
-        }
-
-        .hero-content p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            max-width: 600px;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: #4ecdc4;
-            color: #0a1920;
-            padding: 0.8rem 2rem;
-            border-radius: 30px;
-            font-weight: 600;
-            transition: all 0.3s;
-            border: 2px solid #4ecdc4;
-        }
-
-        .cta-button:hover {
-            background: transparent;
-            color: #4ecdc4;
-        }
-
-        .scroll-down {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0) translateX(-50%);
-            }
-            40% {
-                transform: translateY(-20px) translateX(-50%);
-            }
-            60% {
-                transform: translateY(-10px) translateX(-50%);
-            }
-        }
-
-        /* Секции */
-        section {
-            padding: 5rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #4ecdc4;
-        }
-
-        /* Карточки туров */
-        .tour-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-            backdrop-filter: blur(10px);
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .card-image {
-            height: 200px;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .japan {
-            background: url('https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?ixlib=rb-4.0.3') no-repeat center center/cover;
-        }
-
-        .south-korea {
-            background: url('https://images.unsplash.com/photo-1534274867514-d5b47ef90ed1?ixlib=rb-4.0.3') no-repeat center center/cover;
-        }
-
-        .china {
-            background: url('https://images.unsplash.com/photo-1508804185872-d7badad00f7d?ixlib=rb-4.0.3') no-repeat center center/cover;
-        }
-
-        .card-content {
-            padding: 1.5rem;
-        }
-
-        .card-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: #4ecdc4;
-        }
-
-        .card-content p {
-            margin-bottom: 1.5rem;
-            color: #ccc;
-        }
-
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .price {
-            font-weight: 700;
-            color: #4ecdc4;
-        }
-
-        .card-btn {
-            background: transparent;
-            color: #4ecdc4;
-            border: 2px solid #4ecdc4;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .card-btn:hover {
-            background: #4ecdc4;
-            color: #0a1920;
-        }
-
-        /* О нас */
-        .about {
-            background: linear-gradient(rgba(10, 25, 32, 0.8), rgba(10, 25, 32, 0.8)), url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3') no-repeat center center/cover;
-            border-radius: 10px;
-            margin: 4rem auto;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .feature {
-            text-align: center;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            transition: transform 0.3s;
-        }
-
-        .feature:hover {
-            transform: translateY(-5px);
-        }
-
-        .feature i {
-            font-size: 3rem;
-            color: #4ecdc4;
-            margin-bottom: 1rem;
-        }
-
-        .feature h3 {
-            margin-bottom: 1rem;
-            color: #f1f1f1;
-        }
-
-        /* Отзывы */
-        .review-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .review-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-        }
-
-        .reviewer {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .reviewer img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            margin-right: 1rem;
-            object-fit: cover;
-        }
-
-        .reviewer-info h4 {
-            color: #4ecdc4;
-        }
-
-        .reviewer-info p {
-            color: #ccc;
-            font-size: 0.9rem;
-        }
-
-        .review-text {
-            font-style: italic;
-            color: #f1f1f1;
-        }
-
-        /* Контакты */
-        .contact {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 3rem;
-        }
-
-        .contact-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-        }
-
-        .contact-info p {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .contact-info i {
-            color: #4ecdc4;
-            margin-right: 1rem;
-            font-size: 1.2rem;
-            width: 20px;
-        }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .contact-form input,
-        .contact-form textarea {
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            padding: 0.8rem;
-            margin-bottom: 1rem;
-            border-radius: 5px;
-            color: #f1f1f1;
-            font-family: inherit;
-        }
-
-        .contact-form input::placeholder,
-        .contact-form textarea::placeholder {
-            color: #ccc;
-        }
-
-        .contact-form button {
-            background: #4ecdc4;
-            color: #0a1920;
-            border: none;
-            padding: 0.8rem;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .contact-form button:hover {
-            background: #3bb4ac;
-        }
-
-        /* Футер */
-        footer {
-            background: rgba(10, 25, 32, 0.9);
-            padding: 2rem 0;
-            text-align: center;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            transition: all 0.3s;
-        }
-
-        .social-links a:hover {
-            background: #4ecdc4;
-            transform: translateY(-3px);
-        }
-
-        .social-links i {
-            font-size: 1.2rem;
-        }
-
-        /* Адаптивность */
-        @media screen and (max-width: 768px) {
-            .nav-links {
-                position: absolute;
-                right: 0;
-                height: 100vh;
-                top: 0;
-                background: rgba(10, 25, 32, 0.95);
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                width: 70%;
-                transform: translateX(100%);
-                transition: transform 0.5s ease-in;
-                z-index: 1000;
-            }
-
-            .nav-active {
-                transform: translateX(0%);
-            }
-
-            .burger {
-                display: block;
-                z-index: 1001;
-            }
-
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-content p {
-                font-size: 1.2rem;
-            }
-
-            section {
-                padding: 3rem 1rem;
-            }
-
-            h2 {
-                font-size: 2rem;
-            }
-        }
-
-        /* Анимации */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .card, .feature, .review-card {
-            animation: fadeIn 1s ease-out forwards;
-        }
-
-        .card:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .card:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Видеопродакшн</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #fff;
+      text-align: center;
+    }
+
+    header {
+      background-color: #222;
+      padding: 20px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 10px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .phone {
+      color: orange;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .hero {
+      padding: 40px 20px;
+    }
+
+    .hero img {
+      max-width: 1000px;
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: 32px;
+      margin: 20px 0 10px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #ccc;
+    }
+
+    .services {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      background-color: #1a1a1a;
+      padding: 40px 20px;
+      gap: 20px;
+    }
+
+    .service {
+      background-color: #222;
+      padding: 20px;
+      border-radius: 8px;
+      width: 300px;
+    }
+
+    .service img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .service button {
+      background-color: orange;
+      border: none;
+      padding: 10px 20px;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .section-centered {
+      padding: 30px 20px;
+      background-color: #1a1a1a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .section-centered img {
+      max-width: 1000px;
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .section-centered h2 {
+      margin-bottom: 10px;
+    }
+
+    .section-centered ul {
+      list-style: disc;
+      padding-left: 0;
+      text-align: center;
+    }
+
+    .section-centered p {
+      max-width: 800px;
+      margin: 0 auto 20px;
+      color: #ccc;
+    }
+
+    .section-centered button {
+      background-color: orange;
+      border: none;
+      padding: 10px 20px;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    footer {
+      background-color: #222;
+      padding: 20px;
+      font-size: 14px;
+    }
+
+    footer nav {
+      margin-top: 10px;
+    }
+
+    footer nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">
-                <i class="fas fa-globe-asia"></i>
-                <span>AsiaExplore</span>
-            </div>
-            <ul class="nav-links">
-                <li><a href="#home">Главная</a></li>
-                <li><a href="#tours">Туры</a></li>
-                <li><a href="#about">О нас</a></li>
-                <li><a href="#reviews">Отзывы</a></li>
-                <li><a href="#contact">Контакты</a></li>
-            </ul>
-            <div class="burger">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
-            </div>
-        </nav>
-    </header>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#">Главная</a></li>
+        <li><a href="#">О нас</a></li>
+        <li><a href="#">Услуги</a></li>
+        <li><a href="#">Контакты</a></li>
+      </ul>
+    </nav>
+    <div class="phone">8 800 700 30 30</div>
+    <div class="hero">
+      <img src="https://images.pexels.com/photos/2752007/pexels-photo-2752007.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=1000" alt="Креативное видео">
+      <h1>СНИМЕМ ДЛЯ ВАС КРЕАТИВНОЕ ВИДЕО</h1>
+      <p>Профессиональная видеосъемка для вашего бизнеса и мероприятий</p>
+    </div>
+  </header>
 
-    <main>
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <h1>Открой для себя <span>Восточную Азию</span></h1>
-                <p>Аутентичные путешествия для студентов по доступным ценам</p>
-                <a href="#tours" class="cta-button">Найти тур</a>
-            </div>
-            <div class="scroll-down">
-                <i class="fas fa-chevron-down"></i>
-            </div>
-        </section>
+  <section class="services">
+    <div class="service">
+      <img src="https://images.pexels.com/photos/7096/people-office-group-team.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=600" alt="Реклама">
+      <h2>Реклама</h2>
+      <p>Создание рекламных роликов для ТВ и интернета</p>
+      <button>Подробнее</button>
+    </div>
+    <div class="service">
+      <img src="https://images.pexels.com/photos/1647169/pexels-photo-1647169.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=600" alt="Видео-клип">
+      <h2>Видео-клип</h2>
+      <p>Съемка музыкальных клипов для артистов и групп</p>
+      <button>Подробнее</button>
+    </div>
+    <div class="service">
+      <img src="https://images.pexels.com/photos/265947/pexels-photo-265947.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=600" alt="Свадьба">
+      <h2>Свадьба</h2>
+      <p>Профессиональная съемка свадебных мероприятий</p>
+      <button>Подробнее</button>
+    </div>
+  </section>
 
-        <section id="tours" class="tours">
-            <h2>Популярные направления</h2>
-            <div class="tour-cards">
-                <div class="card">
-                    <div class="card-image japan"></div>
-                    <div class="card-content">
-                        <h3>Япония</h3>
-                        <p>От современных мегаполисов до древних храмов</p>
-                        <div class="card-footer">
-                            <span class="price">от 35 000 руб.</span>
-                            <button class="card-btn">Подробнее</button>
-                        </div>
-                    </div>
-                </div>
+  <section class="section-centered">
+    <img src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=1000" alt="Новости и акции">
+    <h2>НОВОСТИ И АКЦИИ</h2>
+    <ul>
+      <li>Снимем ваш клип на 50% дешевле</li>
+      <li>Свадебное видео со скидкой 30%</li>
+    </ul>
+  </section>
 
-                <div class="card">
-                    <div class="card-image south-korea"></div>
-                    <div class="card-content">
-                        <h3>Южная Корея</h3>
-                        <p>Корейская волна, технологии и древняя культура</p>
-                        <div class="card-footer">
-                            <span class="price">от 32 000 руб.</span>
-                            <button class="card-btn">Подробнее</button>
-                        </div>
-                    </div>
-                </div>
+  <section class="section-centered">
+    <img src="https://images.pexels.com/photos/1181356/pexels-photo-1181356.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=1000" alt="Наша команда">
+    <h2>О НАС</h2>
+    <p>Мы — команда профессионалов, специализирующихся на создании видео для бизнеса, мероприятий и артистов. Работаем по всей стране и гарантируем качество и креативный подход.</p>
+    <button>Подробнее</button>
+  </section>
 
-                <div class="card">
-                    <div class="card-image china"></div>
-                    <div class="card-content">
-                        <h3>Китай</h3>
-                        <p>Великая стена, мегаполисы и многовековая история</p>
-                        <div class="card-footer">
-                            <span class="price">от 28 000 руб.</span>
-                            <button class="card-btn">Подробнее</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <footer>
+    <div class="phone">8 800 700 30 30</div>
+    <nav>
+      <a href="#">Главная</a> |
+      <a href="#">О нас</a> |
+      <a href="#">Услуги</a> |
+      <a href="#">Контакты</a>
+    </nav>
+  </footer>
+</body>
+</html><!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Видеопродакшн</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-        <section id="about" class="about">
-            <div class="about-content">
-                <h2>Почему мы?</h2>
-                <div class="features">
-                    <div class="feature">
-                        <i class="fas fa-wallet"></i>
-                        <h3>Доступные цены</h3>
-                        <p>Специальные предложения и скидки для студентов</p>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-users"></i>
-                        <h3>Групповые туры</h3>
-                        <p>Путешествуйте с единомышленниками своего возраста</p>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-passport"></i>
-                        <h3>Помощь с визами</h3>
-                        <p>Поможем оформить все необходимые документы</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #fff;
+      text-align: center;
+    }
 
-        <section id="reviews" class="reviews">
-            <h2>Отзывы путешественников</h2>
-            <div class="review-cards">
-                <div class="review-card">
-                    <div class="reviewer">
-                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Анна">
-                        <div class="reviewer-info">
-                            <h4>Анна</h4>
-                            <p>Студентка МГУ</p>
-                        </div>
-                    </div>
-                    <p class="review-text">"Поездка в Японию превзошла все ожидания! Организация на высшем уровне, гиды знающие и дружелюбные. Обязательно поеду снова!"</p>
-                </div>
+    header {
+      background-color: #222;
+      padding: 20px;
+    }
 
-                <div class="review-card">
-                    <div class="reviewer">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Дмитрий">
-                        <div class="reviewer-info">
-                            <h4>Дмитрий</h4>
-                            <p>Студент СПбГУ</p>
-                        </div>
-                    </div>
-                    <p class="review-text">"Южная Корея оказалась невероятной! Особенно понравился Сеул и местная кухня. Тур идеально подходит для студентов - весело и недорого."</p>
-                </div>
-            </div>
-        </section>
+    nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 10px;
+    }
 
-        <section id="contact" class="contact">
-            <h2>Остались вопросы?</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <p><i class="fas fa-envelope"></i> info@asiaexplore.ru</p>
-                    <p><i class="fas fa-phone"></i> +7 (999) 123-45-67</p>
-                    <p><i class="fas fa-map-marker-alt"></i> Москва, ул. Студенческая, 15</p>
-                </div>
-                <form class="contact-form">
-                    <input type="text" placeholder="Ваше имя" required>
-                    <input type="email" placeholder="Ваш email" required>
-                    <textarea placeholder="Ваше сообщение" rows="4" required></textarea>
-                    <button type="submit">Отправить</button>
-                </form>
-            </div>
-        </section>
-    </main>
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      padding: 0;
+      margin: 0;
+    }
 
-    <footer>
-        <div class="footer-content">
-            <div class="social-links">
-                <a href="#"><i class="fab fa-vk"></i></a>
-                <a href="#"><i class="fab fa-telegram"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-            </div>
-            <p>&copy; 2023 AsiaExplore. Все права защищены.</p>
-        </div>
-    </footer>
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
 
-    <script>
-        // Бургер-меню
-        const burger = document.querySelector('.burger');
-        const nav = document.querySelector('.nav-links');
-        const navLinks = document.querySelectorAll('.nav-links li');
+    .phone {
+      color: orange;
+      font-weight: bold;
+      margin-top: 10px;
+    }
 
-        burger.addEventListener('click', () => {
-            // Переключение навигации
-            nav.classList.toggle('nav-active');
-            
-            // Анимация ссылок
-            navLinks.forEach((link, index) => {
-                if (link.style.animation) {
-                    link.style.animation = '';
-                } else {
-                    link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
-                }
-            });
-            
-            // Анимация бургера
-            burger.classList.toggle('toggle');
-        });
+    .hero {
+      padding: 40px 20px;
+    }
 
-        // Плавная прокрутка для навигационных ссылок
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Закрываем меню на мобильных устройствах после клика
-                    if (nav.classList.contains('nav-active')) {
-                        nav.classList.remove('nav-active');
-                        burger.classList.remove('toggle');
-                    }
-                }
-            });
-        });
+    .hero img {
+      max-width: 1000px;
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
 
-        // Анимация появления элементов при прокрутке
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+    .hero h1 {
+      font-size: 32px;
+      margin: 20px 0 10px;
+    }
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animation = 'fadeIn 1s ease-out forwards';
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
+    .hero p {
+      font-size: 18px;
+      color: #ccc;
+    }
 
-        // Наблюдаем за карточками и другими элементами
-        document.querySelectorAll('.card, .feature, .review-card').forEach(el => {
-            observer.observe(el);
-        });
+    .services {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      background-color: #1a1a1a;
+      padding: 40px 20px;
+      gap: 20px;
+    }
 
-        // Обработка формы
-        const contactForm = document.querySelector('.contact-form');
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
-                this.reset();
-            });
-        }
-    </script>
+    .service {
+      background-color: #222;
+      padding: 20px;
+      border-radius: 8px;
+      width: 300px;
+    }
+
+    .service img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .service button {
+      background-color: orange;
+      border: none;
+      padding: 10px 20px;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .section-centered {
+      padding: 30px 20px;
+      background-color: #1a1a1a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .section-centered img {
+      max-width: 1000px;
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .section-centered h2 {
+      margin-bottom: 10px;
+    }
+
+    .section-centered ul {
+      list-style: disc;
+      padding-left: 0;
+      text-align: center;
+    }
+
+    .section-centered p {
+      max-width: 800px;
+      margin: 0 auto 20px;
+      color: #ccc;
+    }
+
+    .section-centered button {
+      background-color: orange;
+      border: none;
+      padding: 10px 20px;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    footer {
+      background-color: #222;
+      padding: 20px;
+      font-size: 14px;
+    }
+
+    footer nav {
+      margin-top: 10px;
+    }
+
+    footer nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#">Главная</a></li>
+        <li><a href="#">О нас</a></li>
+        <li><a href="#">Услуги</a></li>
+        <li><a href="#">Контакты</a></li>
+      </ul>
+    </nav>
+    <div class="phone">8 800 700 30 30</div>
+    <div class="hero">
+      <img src="https://images.pexels.com/photos/2752007/pexels-photo-2752007.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=1000" alt="Креативное видео">
+      <h1>СНИМЕМ ДЛЯ ВАС КРЕАТИВНОЕ ВИДЕО</h1>
+      <p>Профессиональная видеосъемка для вашего бизнеса и мероприятий</p>
+    </div>
+  </header>
+
+  <section class="services">
+    <div class="service">
+      <img src="https://images.pexels.com/photos/7096/people-office-group-team.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=600" alt="Реклама">
+      <h2>Реклама</h2>
+      <p>Создание рекламных роликов для ТВ и интернета</p>
+      <button>Подробнее</button>
+    </div>
+    <div class="service">
+      <img src="https://images.pexels.com/photos/1647169/pexels-photo-1647169.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=600" alt="Видео-клип">
+      <h2>Видео-клип</h2>
+      <p>Съемка музыкальных клипов для артистов и групп</p>
+      <button>Подробнее</button>
+    </div>
+    <div class="service">
+      <img src="https://images.pexels.com/photos/265947/pexels-photo-265947.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=600" alt="Свадьба">
+      <h2>Свадьба</h2>
+      <p>Профессиональная съемка свадебных мероприятий</p>
+      <button>Подробнее</button>
+    </div>
+  </section>
+
+  <section class="section-centered">
+    <img src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=1000" alt="Новости и акции">
+    <h2>НОВОСТИ И АКЦИИ</h2>
+    <ul>
+      <li>Снимем ваш клип на 50% дешевле</li>
+      <li>Свадебное видео со скидкой 30%</li>
+    </ul>
+  </section>
+
+  <section class="section-centered">
+    <img src="https://images.pexels.com/photos/1181356/pexels-photo-1181356.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=1000" alt="Наша команда">
+    <h2>О НАС</h2>
+    <p>Мы — команда профессионалов, специализирующихся на создании видео для бизнеса, мероприятий и артистов. Работаем по всей стране и гарантируем качество и креативный подход.</p>
+    <button>Подробнее</button>
+  </section>
+
+  <footer>
+    <div class="phone">8 800 700 30 30</div>
+    <nav>
+      <a href="#">Главная</a> |
+      <a href="#">О нас</a> |
+      <a href="#">Услуги</a> |
+      <a href="#">Контакты</a>
+    </nav>
+  </footer>
 </body>
 </html>
